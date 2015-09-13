@@ -1,11 +1,11 @@
-/**
- * 
- */
 package com.bankonet.model;
+
+import java.util.ArrayList;
 
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
+import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -34,6 +34,9 @@ private String mdp;
 // le @Embedded perment d'informer qu'il faut inserer dans la simple table (Personne) les attribut de la classe adresse  
 @Embedded
 private Adresse adresse;
+//relation avec la table Compte 
+@OneToMany
+private ArrayList<Compte> listeCompte;
 
 
 /**
@@ -74,6 +77,20 @@ public void setMdp(String mdp) {
 }
 /**
  * 
+ * @return
+ */
+public ArrayList<Compte> getListeCompte() {
+	return listeCompte;
+}
+/**
+ * 
+ * @param listeCompte
+ */
+public void setListeCompte(ArrayList<Compte> listeCompte) {
+	this.listeCompte = listeCompte;
+}
+/**
+ * 
  */
 public Client() {
 	super();
@@ -100,6 +117,21 @@ public Client(String nom , String prenom, String login, String mdp, Adresse adre
 	this.login = login;
 	this.mdp = mdp;
 	this.adresse = adresse;
+}
+
+
+/**
+ * @param login
+ * @param mdp
+ * @param adresse
+ * @param listeCompte
+ */
+public Client(String login, String mdp, Adresse adresse, ArrayList<Compte> listeCompte) {
+	super();
+	this.login = login;
+	this.mdp = mdp;
+	this.adresse = adresse;
+	this.listeCompte = listeCompte;
 }
 /* (non-Javadoc)
  * @see java.lang.Object#toString()
