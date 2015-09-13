@@ -4,13 +4,22 @@
 package com.bankonet.model;
 
 
+import javax.persistence.Entity;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
+import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  * @author Yoann
  *
  */
-public class compteCourant extends Compte {
 
+@Entity
+public class compteCourant extends Compte {
+		
 	private float debit;	
 
 	public float getDebit() {
@@ -26,19 +35,20 @@ public class compteCourant extends Compte {
 	 */
 	public compteCourant() {
 		super();
-	}
+	}	
 
 	/**
-	 * @param debit
+	 * @param solde
 	 */
-	public compteCourant(float debit) {
-		super();
+	public compteCourant(Compte compte,  float debit) {
+		super.setIntitule(compte.getIntitule());
+		super.setSolde(compte.getSolde());		
 		this.debit = debit;
 	}
 	
 	@Override
 	public String toString() {
-		return "compteCourant [debit=" + debit + "]";	
+		return "compteCourant ["+super.toString()+" debit=" + debit +  "]";	
 	}
 
 	

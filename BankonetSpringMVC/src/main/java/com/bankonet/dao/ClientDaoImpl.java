@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 
 import com.bankonet.model.Client;
+import com.bankonet.model.Compte;
 
 @Repository("dao")
 public class ClientDaoImpl implements IClientDao {
@@ -65,9 +66,38 @@ public class ClientDaoImpl implements IClientDao {
 	}
 
 	
+	@SuppressWarnings("unchecked")
 	public List<Client> chercherClients(String motCle) {
 		System.out.println("Recherche d'un client");	
 		return entityManager.createQuery("SELECT C FROM Client C WHERE C.nom like :x or C.prenom like :x").setParameter("x", "%" + motCle + "%").getResultList();
+	}
+
+
+	@Override
+	public void addCompte(Compte cpt) throws Exception {
+		entityManager.persist(cpt);		
+	}
+
+
+
+	@Override
+	public List<Compte> listCompteClients(String idClient) {
+		// TODO Auto-generated method stub
+		return entityManager.createQuery("SELECT CPT FROM Compte CPT, Client C WHERE CPT.client.id=c.id WHERE c.id=:x").setParameter("x",idClient).getResultList();
+	}
+
+
+	@Override
+	public void deleteCompteClient(int idCompte) {
+		Compte c = entityManager.find(Compte.class, idCompte);
+		entityManager.remove(c);
+	}
+
+
+	@Override
+	public Client editCompteClient(int idClient) {
+		
+		return null;
 	}
 
 }

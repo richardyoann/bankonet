@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.bankonet.dao.IClientDao;
 import com.bankonet.model.Client;
+import com.bankonet.model.Compte;
 /**
  * @author ETY
  *
@@ -101,6 +102,30 @@ public class ClientService implements IClientService {
 	public List<Client> chercherClients(String motCle) {
 		System.out.println("dans ClientService.chercherClients --> cherche d'un client");
 		return dao.chercherClients(motCle);
+	}
+
+	@Override
+	public void addCompte(Compte cpt) throws Exception {
+		dao.addCompte(cpt);
+		
+	}
+
+
+	@Override
+	public void deleteCompteClient(int idCompte) {		
+		dao.deleteClient(idCompte);		
+	}
+
+	@Override
+	public Client editCompteClient(int idClient) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Compte> listCompteClients(String idClient) {
+		// TODO Auto-generated method stub
+		return dao.listCompteClients(idClient);
 	}
 	
 	

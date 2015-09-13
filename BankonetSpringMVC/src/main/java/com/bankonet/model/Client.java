@@ -1,6 +1,6 @@
 package com.bankonet.model;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Embedded;
@@ -36,7 +36,7 @@ private String mdp;
 private Adresse adresse;
 //relation avec la table Compte 
 @OneToMany
-private ArrayList<Compte> listeCompte;
+private List<Compte> listeCompte;
 
 
 /**
@@ -79,14 +79,14 @@ public void setMdp(String mdp) {
  * 
  * @return
  */
-public ArrayList<Compte> getListeCompte() {
-	return listeCompte;
+public List<Compte> getListeCompte() {
+	return  listeCompte;
 }
 /**
  * 
  * @param listeCompte
  */
-public void setListeCompte(ArrayList<Compte> listeCompte) {
+public void setListeCompte(List<Compte> listeCompte) {
 	this.listeCompte = listeCompte;
 }
 /**
@@ -126,19 +126,16 @@ public Client(String nom , String prenom, String login, String mdp, Adresse adre
  * @param adresse
  * @param listeCompte
  */
-public Client(String login, String mdp, Adresse adresse, ArrayList<Compte> listeCompte) {
+public Client(String login, String mdp, Adresse adresse, List<Compte> listeCompte) {
 	super();
 	this.login = login;
 	this.mdp = mdp;
 	this.adresse = adresse;
 	this.listeCompte = listeCompte;
 }
-/* (non-Javadoc)
- * @see java.lang.Object#toString()
- */
 @Override
 public String toString() {
-	return " Client [ " + super.toString() + " login=" + login + ", mdp=" + mdp + adresse.toString()+"]";
+	return "Client [login=" + login + ", mdp=" + mdp + ", adresse=" + adresse + ", listeCompte=" + listeCompte + "]";
 }
 
 

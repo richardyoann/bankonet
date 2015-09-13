@@ -2,12 +2,15 @@
  * 
  */
 package com.bankonet.model;
-	
+
+import javax.persistence.Entity;
+
 /**
  * @author Yoann
  *
  */
-public class compteEpargne {
+@Entity
+public class compteEpargne extends Compte{
 	private float TxE;
 	public float getTxE() {
 		return TxE;

@@ -2,17 +2,31 @@ package com.bankonet.model;
 
 import java.util.ArrayList;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+
+import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  * @author Yoann
  *
  */
-public class Compte {
+@Entity
+@Inheritance(strategy=InheritanceType.JOINED)
+public  class Compte {
+	@Id 
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
 	private String intitule;
 	private float solde;
+	// le @autowired permet de lier automatiquement le bean adresse 
+	@Autowired
 	@ManyToOne
 	@JoinColumn(name="Client-ID")		
 	private Client client;
@@ -51,30 +65,17 @@ public class Compte {
 	 * @param intitule
 	 * @param solde
 	 */
-	public Compte(long id, String intitule,float solde) {
+	public Compte( String intitule,float solde) {
 		super();
-		this.id = id;
+		
 		this.intitule = intitule;
 		this.solde=solde;
 	}
 	
-	/**
-	 * @param id
-	 * @param intitule
-	 * @param solde
-	 * @param listeClient
-	 */
-	public Compte(long id, String intitule, float solde, Client client) {
-		super();
-		this.id = id;
-		this.intitule = intitule;
-		this.solde = solde;
-		this.client = client;
-	}
+	
 	@Override
 	public String toString() {
-		return "Compte [id=" + id + ", intitule=" + intitule + ", solde=" + solde + ", Client=" + client
-				+ "]";
+		return "Compte [id=" + id + ", intitule=" + intitule + ", solde=" + solde + "]";
 	}
 	
 	
